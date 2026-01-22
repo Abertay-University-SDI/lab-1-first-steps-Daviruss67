@@ -56,14 +56,15 @@ void Level::update(float dt)
 		m_player.move({ -m_speed * dt, 0.f });
 	}
 
-	if (m_player.getPosition().x > m_window.getSize().x) 
+	if (m_player.getPosition().x > m_window.getSize().x || m_player.getPosition().x < 0) 
 	{
-		m_player.setPosition({ 400, 300 });
+		m_player.setPosition({ 400,300 });
 	}
-	if (m_player.getPosition().y > m_window.getSize().y)
+	else if (m_player.getPosition().y > m_window.getSize().y || m_player.getPosition().y < 0) 
 	{
-		m_player.setPosition({ 400, 300 });
+		m_player.setPosition({ 400,300 });
 	}
+
 }
 
 // Render level
