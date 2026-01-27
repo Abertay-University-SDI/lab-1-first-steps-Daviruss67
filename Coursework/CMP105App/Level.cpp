@@ -56,13 +56,18 @@ void Level::update(float dt)
 		m_player.move({ -m_speed * dt, 0.f });
 	}
 
-	if (m_player.getPosition().x > m_window.getSize().x || m_player.getPosition().x < 0) 
+	// Check for wall collision
+	sf::Vector2u window_size = m_window.getSize();
+	sf::Vector2f snake_pos = m_player.getPosition();
+	if (snake_pos.x < 0 || snake_pos.y < 0 || snake_pos.x + 2 * m_player.getRadius() > window_size.x
+		|| snake_pos.y + 2 * m_player.getRadius() > window_size.y) 
 	{
-		m_player.setPosition({ 400,300 });
-	}
-	else if (m_player.getPosition().y > m_window.getSize().y || m_player.getPosition().y < 0) 
-	{
-		m_player.setPosition({ 400,300 });
+		//Reset player to center
+		m_player.setPosition({
+			window_size.x / 2.f - m_player.getRadius(),
+			window_size.y / 2.f - m_player.getRadius()
+			});
+
 	}
 
 }
